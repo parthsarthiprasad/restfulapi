@@ -39,6 +39,7 @@ router.post('/' ,(req,res,next) =>{
     })
 });
 
+
 router.get('/:productId' , (req,res,next)=>{
     if(id=="*")
     {
