@@ -12,10 +12,10 @@ router.get('/' ,(req,res,next)=>{
 });
 
 router.post('/' ,(req,res,next) =>{
-    const product ={ 
-                     name: req.body.name,
-                     price: req.body.price
-    };
+    // const product ={ 
+    //                  name: req.body.name,
+    //                  price: req.body.price
+    // };
 
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
@@ -29,7 +29,7 @@ router.post('/' ,(req,res,next) =>{
     product
     .save()
     .then(result=>{
-        console.log(result;)
+        console.log(result);
     })
     .catch(err =>console.log(err));
     
@@ -40,17 +40,20 @@ router.post('/' ,(req,res,next) =>{
 });
 
 router.get('/:productId' , (req,res,next)=>{
+    if(id=="*")
+    {
+        
+    }
     const id = req.params.productId;
-    if(id=== 'special'){
-        res.status(200).json({
-           message: 'you discovered the special id' 
-        })
-    }
-    else {
-        res.status(200).json({
-            message: "you passed an ID"
-        })
-    }
+    Product.findById(id)
+    .exec()
+    .then( doc => {
+        console.log(doc);
+        res.status(200).json({doc});
+    })
+    .catch( err => {console.log(err);
+    res.status(500).json({error:err});
+    })
 })
 
 router.patch('/:productsid' ,(req,res,next)=>{

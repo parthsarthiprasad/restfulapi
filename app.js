@@ -8,8 +8,9 @@ const mongoose = require('mongoose')
 
 
 mongoose.connect('mongodb+srv://slad_user:' + process.env.MONGO_ATLAS_PW +'@node-rest-shop-wv0yk.mongodb.net/test?retryWrites=true&w=majority',{
-    useMongoClient: true 
-
+    //useMongoClient: true 
+    // this is deprciated now
+     useNewUrlParser: true
 }
 );
 
