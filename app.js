@@ -1,20 +1,35 @@
 const path =require('path');
-const express = require('express')
+const express = require('express');
 const app = express();
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/order');
-const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 
 mongoose.connect('mongodb+srv://slad_user:' + process.env.MONGO_ATLAS_PW +'@node-rest-shop-wv0yk.mongodb.net/test?retryWrites=true&w=majority',{
-    //useMongoClient: true 
-    // this is deprciated now
      useNewUrlParser: true
-}
+    }
 );
 
-
+// mongoose.connect(
+//     "mongodb+srv://slad_user:<password>@node-rest-shop-wv0yk.mongodb.net/test?retryWrites=true&w=majority",
+//       {
+//         auth: {
+//             user: 'slad_user',
+//             password: process.env.MONGO_ATLAS_PW 
+//         },
+//         useNewUrlParser : true 
+//     },
+//     function(err, client){
+//         if(err){
+//             console.log(err)
+//         }
+//         else{
+//         console.log("connected!!") ;
+//         }
+//     }
+// );
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json()); 
 // this is done to handle cors errors (cross origin request sharing)

@@ -4,6 +4,23 @@ const mongoose = require('mongoose');
 
 const Product  = require('../models/product');
 router.get('/' ,(req,res,next)=>{
+    
+    product.find()
+    .exec()
+    .then(docs=>{
+        console.log(docs);
+        res.status(200).json(docs);
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error:err
+        });
+
+    });
+    
+    
+    
     res.status(200).json({
         message: 'handling GET requests to /products'    
     });
@@ -32,34 +49,39 @@ router.post('/' ,(req,res,next) =>{
         console.log(result);
         res.status (200).json({
         message: 'handling POST requests to /products' ,
-        createdProduct: result
-        })
+        createdProduct: result         
+        }) 
     })
     .catch(err =>{console.log(err)
-      res.status(500).json({
-          error: err
-      })  
+                res.status(500).json({
+                error: err
+          })  
     });
-    
-    
+        
 });
 
 router.get('/:productId' , (req,res,next)=>{
-    if(id=="*")
-    {
-        
-    }
+   
     const id = req.params.productId;
-    Product.findById(id)
+
+    Product
+    .findById(id)
     .exec()
     .then( doc => {
-        console.log(doc);
-        res.status(200).json({doc});
+        console.log("from database" , doc);
+        if (doc){
+        res.status(200).json(doc);
+        }
+        else{
+            res.status(404).json({message: "no valid entry found for provided ID"});
+        }
+
     })
-    .catch( err => {console.log(err);
-    res.status(500).json({error:err});
-    })
-})
+    .catch( err => {
+        console.log(err);
+        res.status(500).json({error:err});
+    });
+});
 
 router.patch('/:productsid' ,(req,res,next)=>{
     res.status(200).json({
@@ -68,9 +90,18 @@ router.patch('/:productsid' ,(req,res,next)=>{
 })
 
 router.delete('/:productsid' ,(req,res,next)=>{
-    res.status(200).json({
-        message: 'delete product|'
+   const id = req.params.productId
+    Product.remove({_Id: id})
+    .exec()
+    .then( result =>{
+        res.status(200).json(result);
     })
-})
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json({
+            error:err
+        })
+    })
+});
 
 module.exports = router;
