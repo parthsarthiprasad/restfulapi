@@ -1,7 +1,7 @@
 {
   "name": "restfulapi",
   "version": "1.0.0",
-  "description": "",
+  "description": "the project is to create a shopping cart with cloud connection to mongo server with basic functionality of authentication , geolocation and to create a working shopping cart.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,5 +18,13 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parthsarthiprasad/restfulapi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/parthsarthiprasad/restfulapi/issues"
+  },
+  "homepage": "https://github.com/parthsarthiprasad/restfulapi#readme"
 }
