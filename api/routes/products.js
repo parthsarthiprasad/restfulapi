@@ -87,11 +87,15 @@ router.get('/:productId', (req, res, next) => {
             });
         });
 });
+// patching sysntax 
+// [
+//     { "propName" : "name" , "value": "harry potter 6" }
+// ]
 
 router.patch('/:productsid', (req, res, next) => {
     const id = req.params.productId;
     const updateOps = {};
-    for (const aps of req.body) {
+    for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
     Product.update({
