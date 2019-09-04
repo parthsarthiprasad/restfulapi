@@ -10,7 +10,10 @@ router.get('/', (req, res, next) => {
     Order
         .find()
         .select('product quantity _id')
+<<<<<<< HEAD
         .populate('product', ' name')
+=======
+>>>>>>> 7c22f59f97f1a752f81581414e8a9798c2bb84b6
         .exec()
         .then(docs => {
             res.status(200).json({
@@ -108,7 +111,10 @@ router.post('/', (req, res, next) => {
 
 router.get('/:orderId', (req, res, next) => {
     Order.findById(req.params.orderId)
+<<<<<<< HEAD
         .populate('product')
+=======
+>>>>>>> 7c22f59f97f1a752f81581414e8a9798c2bb84b6
         .exec()
         .then(order => {
             if (!order) {
